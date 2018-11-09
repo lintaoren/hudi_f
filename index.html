@@ -1,1 +1,104 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing:border-box;
+}
+
+.full {
+  float:left;
+  width:100%;
+}
+
+.box {
+  padding:20px;
+  float:left;
+  height:30%;
+  width:50%;
+}
+
+.bg-blue{
+  background-color:#2196F3;
+}
+
+.bg-green{
+  background-color:#4CAF50;
+}
+
+</style>
+</head>
+<body>
+
+<input class="full" type="text" id="demo" name="the_text" value="" readonly /><br/>
+<input class="full" type="text" id="wew" name="wew" value="" readonly hidden /><br/>
+
+<button class="box bg-blue" id="btn1" onclick="myFunction(1)">1</button>
+<button class="box bg-green" id="btn2" onclick="myFunction(2)">2</button>
+<button class="box bg-blue" id="btn3" onclick="myFunction(3)">3</button>
+<button class="box bg-green" id="btn4" onclick="myFunction(4)">4</button>
+<button class="box bg-blue" id="btn5" onclick="myFunction(5)">5</button>
+<button class="box bg-green" id="btn0" onclick="myFunction(0)">0</button>
+
+<script>
+
+pos = [
+  11, 12, 13, 14, 15,
+  21, 22, 23, 24, 25,
+  31, 32, 33, 34, 35,
+  41, 42, 43, 44, 45,
+  51, 52, 53, 54, 55,
+]
+val = [
+  "a", "b", "c", "d", "e",
+  "f", "g", "h", "i", "j",
+  "k", "l", "m", "n", "o",
+  "p", "q", "r", "s", "t",
+  "u", "v", "w", "x", "y",
+]
+
+dct = {}
+for (i=0; i<pos.length; ++i) {
+  dct[pos[i]] = val[i]
+}
+
+function setText(id, t) {
+  document.getElementById(id).value = t ? t : "Text will appear here .."
+}
+function setInner(id, t) {
+  document.getElementById(id).innerHTML = t ? t : "Text will appear here .."
+}
+
+ipt_tmp = ""
+txt = ""
+
+function refresh_ipt() {
+  setText("demo", txt)
+  ipt_tmp = ""
+  for (i=1; i<6; ++i) {
+    val_tmp = val.slice(i*5-5, i*5)
+    setInner("btn"+i, val_tmp.join(" "))
+  }
+}
+
+function myFunction(param) {
+  ipt_tmp += param
+  if (ipt_tmp.length > 1)
+  {
+    txt += dct[ipt_tmp]
+    refresh_ipt()
+  }
+  else if (ipt_tmp.length == 1)
+  {
+    val_tmp = val.slice(ipt_tmp*5-5, ipt_tmp*5)
+    for (i=1; i<6; ++i) {
+    	setInner("btn"+i, val_tmp[i-1])
+    }
+  }
+}
+
+refresh_ipt()
+</script>
+
+</body>
+</html>
